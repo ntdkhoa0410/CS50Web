@@ -1,0 +1,17 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Edit page
+{% endblock %}
+
+{% block body %}
+    <h1>Create your new page!</h1>
+    <form action=" {% url 'save' %} " method="POST">
+        {% csrf_token %}
+        <label>Title: </label>
+        <input type="text" name="title" placeholder="The title of the page" value="{{title}}"><br/>
+        <label>The markdown content of your page:</label><br/>
+        <textarea name="content" style="width:50%;height: 40vh;" placeholder="Remember to add #YourTitle">{{content}}</textarea><br/>
+        <input type="submit">
+    </form>
+{% endblock %}

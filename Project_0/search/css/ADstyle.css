@@ -1,0 +1,58 @@
+body {
+    background-color: rgb(32, 28, 28) !important;
+    color: white;
+    font-family: 'Product Sans', sans-serif;
+  }
+  .navbar{
+      list-style-type: none;  
+      /*outline: 1px solid yellow;*/
+      float: right ;
+      display: inline;
+      margin-top: 8px;
+  }
+
+  .table {
+    position: absolute;
+    left: 10vw;
+    top: 80px;
+    width: 85%;
+  }
+  li {
+      display: inline;
+      float: right;
+      padding-left: 8px;
+  }
+  li a{
+      color: white;
+      text-decoration: none;
+  }
+  li a:hover{
+      text-decoration: underline;
+  }
+  p{
+    /*outline: 1px solid yellow;*/
+    float: left;
+    margin-top: 8px;
+
+  }
+  .Advance{
+    position: absolute;
+    left: 10vw;
+    top: 40px;
+  }
+  #submitButton {
+    background-color: rgb(59, 59, 207);
+    color: white;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  tr input{
+    width: 100%;
+    float: right;
+  }
+  td:nth-child(2){
+    width: 40%;
+  }
+
+  

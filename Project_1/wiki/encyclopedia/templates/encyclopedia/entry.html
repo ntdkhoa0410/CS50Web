@@ -1,0 +1,17 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{name}}
+{% endblock %}
+
+{% block body %}
+    {%if entry == "no data for this entry" %}
+    <h1>{{name}}</h1>
+    {% endif %}
+    {{ entry | safe}}
+    <form action="{% url 'edit' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="old_title" value="{{name}}">
+        <input type="submit" value="Edit this page">
+    </form>
+{% endblock %}
