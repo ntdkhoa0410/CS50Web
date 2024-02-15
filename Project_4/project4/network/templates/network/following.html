@@ -1,0 +1,47 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h4>Followings</h4>
+    <div>
+        {% for post in page_obj %}
+        <div class="list-group-item">
+            <h5>Author: <a href="{% url 'profile' user_id=post.author_id %}">{{ post.author }}</a> </h5>
+            <h6>At: {{post.timestamp}}</h6>
+            <p>Has wrote: {{post.content}}</p>
+            {% with post_id=post.id %}
+                {% if user.id in post_likers_ids|get_item:post_id %}
+                    {% with likes_num=post_likers_ids|get_item:post_id|length %}
+                        <p id="like_no_of_post_{{post.id}}" class="likes"><a id="like_manager_{{post.id}}" href="javascript:void(0)" onclick="likeUpdater({{post.id}},{{user.id}},true,{{likes_num}})">Unlike</a>: {{likes_num}}</p>
+                    {% endwith %}      
+                {% else %}
+                    {% with likes_num=post_likers_ids|get_item:post_id|length %}
+                        <p id="like_no_of_post_{{post.id}}" class="likes"><a id="like_manager_{{post.id}}" href="javascript:void(0)" onclick="likeUpdater({{post.id}},{{user.id}},false,{{likes_num}})">Like</a>: {{likes_num}}</p>
+                    {% endwith %}  
+                {% endif %}
+            {% endwith %}
+        </div>
+        {% endfor %}
+    </div>
+    <div id="toggle" class="d-flex align-items-center justify-content-center my-5">
+        <nav>
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">previous</a></li>
+                {% endif %}
+                <li class="page-item mx-3">
+                    <p class="text-center mt-2"> Page {{page_obj.number}} of {{page_obj.paginator.num_pages}} </p>
+                </li>
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">next</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
+                {% endif %}
+            </ul>
+        </nav>        
+    </div>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'network/script.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+{% endblock %}
